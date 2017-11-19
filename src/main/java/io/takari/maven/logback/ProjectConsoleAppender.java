@@ -35,7 +35,7 @@ public class ProjectConsoleAppender extends ConsoleAppender<ILoggingEvent>
 
   @Override
   protected void subAppend(ILoggingEvent event) {
-    String projectId = event.getMDCPropertyMap().get(SLF4J.KEY_PROJECT_ID);
+    String projectId = SLF4J.getFromMDC(event, SLF4J.KEY_PROJECT_ID);
     if (projectId != null) {
       synchronized (queue) {
         queue.put(projectId, LoggingEventVO.build(event));

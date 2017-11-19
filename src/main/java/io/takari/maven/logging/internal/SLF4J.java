@@ -8,8 +8,10 @@
 package io.takari.maven.logging.internal;
 
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.maven.execution.MavenSession;
@@ -17,6 +19,8 @@ import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.project.MavenProject;
 import org.slf4j.MDC;
+
+import ch.qos.logback.classic.spi.ILoggingEvent;
 
 public final class SLF4J {
   private SLF4J() {}
@@ -55,6 +59,8 @@ public final class SLF4J {
   public static final String KEY_MOJO_VERSION = "maven.mojo.version";
 
   public static final String KEY_MOJO_GOAL = "maven.mojo.goal";
+  
+  private static final ThreadLocal<Map<String, String>> INHERITABLE_MDC = new InheritableThreadLocal<>();
 
   /**
    * Returns conventional per-project build log directory.
@@ -73,11 +79,11 @@ public final class SLF4J {
       // ignore standalone mvn execution
       return;
     }
-    MDC.put(KEY_PROJECT_ID, project.getId());
-    MDC.put(KEY_PROJECT_GROUPID, project.getGroupId());
-    MDC.put(KEY_PROJECT_ARTIFACTID, project.getArtifactId());
-    MDC.put(KEY_PROJECT_BASEDIR, project.getBasedir().getAbsolutePath());
-    MDC.put(KEY_PROJECT_LOGDIR, getLogdir(project));
+    put(KEY_PROJECT_ID, project.getId());
+    put(KEY_PROJECT_GROUPID, project.getGroupId());
+    put(KEY_PROJECT_ARTIFACTID, project.getArtifactId());
+    put(KEY_PROJECT_BASEDIR, project.getBasedir().getAbsolutePath());
+    put(KEY_PROJECT_LOGDIR, getLogdir(project));
   }
 
   /**
@@ -89,11 +95,11 @@ public final class SLF4J {
     if (project == null) {
       return;
     }
-    MDC.remove(KEY_PROJECT_ID);
-    MDC.remove(KEY_PROJECT_GROUPID);
-    MDC.remove(KEY_PROJECT_ARTIFACTID);
-    MDC.remove(KEY_PROJECT_BASEDIR);
-    MDC.remove(KEY_PROJECT_LOGDIR);
+    remove(KEY_PROJECT_ID);
+    remove(KEY_PROJECT_GROUPID);
+    remove(KEY_PROJECT_ARTIFACTID);
+    remove(KEY_PROJECT_BASEDIR);
+    remove(KEY_PROJECT_LOGDIR);
   }
 
   private static List<LifecycleListener> listeners = new CopyOnWriteArrayList<>();
@@ -149,21 +155,50 @@ public final class SLF4J {
       id.append(':');
       id.append(execution.getExecutionId());
     }
-    MDC.put(KEY_MOJO_ID, id.toString());
-    MDC.put(KEY_MOJO_GROUPID, execution.getGroupId());
-    MDC.put(KEY_MOJO_ARTIFACTID, execution.getArtifactId());
-    MDC.put(KEY_MOJO_VERSION, execution.getVersion());
-    MDC.put(KEY_MOJO_GOAL, execution.getGoal());
+    put(KEY_MOJO_ID, id.toString());
+    put(KEY_MOJO_GROUPID, execution.getGroupId());
+    put(KEY_MOJO_ARTIFACTID, execution.getArtifactId());
+    put(KEY_MOJO_VERSION, execution.getVersion());
+    put(KEY_MOJO_GOAL, execution.getGoal());
     for (LifecycleListener listener : listeners) {
       listener.onMojoExecutionStart(project, lifecycle, execution);
     }
   }
 
   static void notifyMojoExecutionFinish(MavenProject project, MojoExecution execution) {
-    MDC.remove(KEY_MOJO_ID);
-    MDC.remove(KEY_MOJO_GROUPID);
-    MDC.remove(KEY_MOJO_ARTIFACTID);
-    MDC.remove(KEY_MOJO_VERSION);
-    MDC.remove(KEY_MOJO_GOAL);
+    remove(KEY_MOJO_ID);
+    remove(KEY_MOJO_GROUPID);
+    remove(KEY_MOJO_ARTIFACTID);
+    remove(KEY_MOJO_VERSION);
+    remove(KEY_MOJO_GOAL);
+  }
+
+  public static String getFromMDC(ILoggingEvent event, String key) {
+    String value = event.getMDCPropertyMap().get(key);
+    if (value == null) {
+      value = getFallback(key);
+    }
+    return value;
+  }
+  
+  private static String getFallback(String key) {
+    if (INHERITABLE_MDC.get() == null) {
+      return null;
+    }
+    return INHERITABLE_MDC.get().get(key);
+
+  }
+
+  private static void put(String key, String value) {
+    MDC.put(key, value);
+    if (INHERITABLE_MDC.get() == null) {
+      INHERITABLE_MDC.set(new HashMap<>());
+    }
+    INHERITABLE_MDC.get().put(key, value);
+  }
+
+  private static void remove(String key) {
+    MDC.remove(key);
+    INHERITABLE_MDC.get().remove(key);
   }
 }

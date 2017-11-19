@@ -79,7 +79,7 @@ public class LogbackConfiguration extends AbstractMavenLifecycleParticipant {
     // release plugin asks the user to provide release information, for example
     // no need to redirect such interactions to slf4j.
 
-    if (!request.isInteractiveMode()) {
+    if (!request.isInteractiveMode() || Boolean.valueOf(System.getProperty("maven.logging.overrideinteractive"))) {
       // funnel System out/err message to slf4j when in batch mode
       System.setOut(new SLF4JPrintStream(System.out, false));
       System.setErr(new SLF4JPrintStream(System.err, true));
