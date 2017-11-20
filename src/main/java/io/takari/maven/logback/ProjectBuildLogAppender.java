@@ -7,7 +7,6 @@
  */
 package io.takari.maven.logback;
 
-
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
@@ -70,8 +69,7 @@ public class ProjectBuildLogAppender extends AppenderBase<ILoggingEvent>
   private final Cache<String, FileAppender<ILoggingEvent>> appenders = CacheBuilder.newBuilder() //
       .removalListener(new RemovalListener<String, FileAppender<ILoggingEvent>>() {
         @Override
-        public void onRemoval(
-            RemovalNotification<String, FileAppender<ILoggingEvent>> notification) {
+        public void onRemoval(RemovalNotification<String, FileAppender<ILoggingEvent>> notification) {
           if (notification.getValue() != null) {
             notification.getValue().stop();
           }
@@ -136,7 +134,7 @@ public class ProjectBuildLogAppender extends AppenderBase<ILoggingEvent>
       appender.setName(projectId);
       appender.setAppend(false);
       appender.setEncoder(encoder);
-      appender.setFile(getLogfile(projectLogdir).getAbsolutePath());
+      appender.setFile(getLogfile(projectLogdir, projectId).getAbsolutePath());
       appender.start();
 
       if (!appender.isStarted()) {
@@ -155,13 +153,14 @@ public class ProjectBuildLogAppender extends AppenderBase<ILoggingEvent>
 
   private void cleanOldLogFiles(MavenSession session) {
     for (MavenProject project : session.getAllProjects()) {
-      File logfile = getLogfile(SLF4J.getLogdir(project));
+      File logfile = getLogfile(SLF4J.getLogdir(project), project.getId());
       logfile.delete();
     }
   }
 
-  private File getLogfile(String logdir) {
-    return new File(logdir, fileName);
+  private File getLogfile(String logdir, String projectId) {
+    return new File(logdir, projectId + "-" + fileName);
+
   }
 
   public void setPattern(String pattern) {
@@ -193,8 +192,7 @@ public class ProjectBuildLogAppender extends AppenderBase<ILoggingEvent>
   }
 
   @Override
-  public void onMojoExecutionStart(MavenProject project, Lifecycle lifecycle,
-      MojoExecution execution) {
+  public void onMojoExecutionStart(MavenProject project, Lifecycle lifecycle, MojoExecution execution) {
     if (lifecycle == null || "clean".equals(lifecycle.getId())) {
       return;
     }

@@ -13,7 +13,7 @@ and never interleave with messages from other projects or overall build messages
   </appender>
 
   <appender name="PROJECT" class="io.takari.maven.logback.ProjectBuildLogAppender">
-    <file>root-build.log</file>
+    <file>build.log</file>
     <pattern>%d{HH:mm:ss.SSS} %.-1level %msg%n</pattern>
   </appender>
 
