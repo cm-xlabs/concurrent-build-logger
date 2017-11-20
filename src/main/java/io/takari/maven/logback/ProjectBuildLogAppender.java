@@ -159,8 +159,7 @@ public class ProjectBuildLogAppender extends AppenderBase<ILoggingEvent>
   }
 
   private File getLogfile(String logdir, String projectId) {
-    return new File(logdir, projectId + "-" + fileName);
-
+    return new File(logdir, projectId.replaceAll(":", "_") + "-" + fileName);
   }
 
   public void setPattern(String pattern) {
