@@ -105,7 +105,7 @@ public class ProjectBuildLogAppender extends AppenderBase<ILoggingEvent>
       return;
     }
 
-    String projectId = mdc.get(SLF4J.KEY_PROJECT_ID);
+    String projectId = SLF4J.getFromMDC(event, SLF4J.KEY_PROJECT_ID);
     if (projectId == null) {
       return;
     }
