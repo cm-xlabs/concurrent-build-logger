@@ -7,7 +7,7 @@
   http://www.eclipse.org/legal/epl-v10.html
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -22,10 +22,10 @@
   <packaging>takari-maven-component</packaging>
 
   <properties>
-    <mavenVersion>3.5.0</mavenVersion>
-    <slf4jVersion>1.7.24</slf4jVersion>
+    <mavenVersion>3.6.0</mavenVersion>
+    <slf4jVersion>1.7.25</slf4jVersion>
     <logbackVersion>1.2.1</logbackVersion>
-    <pluginTestingVersion>2.9.1</pluginTestingVersion>
+    <pluginTestingVersion>2.9.2</pluginTestingVersion>
     <takari.LocalRepositoryVersion>0.11.2</takari.LocalRepositoryVersion>
     <takari.fileManagerVersion>0.8.3</takari.fileManagerVersion>
     <takari.smartBuilderVersion>0.6.1</takari.smartBuilderVersion>
@@ -75,10 +75,10 @@
       <version>${slf4jVersion}</version>
     </dependency>
     <dependency>
-    <groupId>io.takari.aether</groupId>
-    <artifactId>takari-local-repository</artifactId>
-    <version>${takari.LocalRepositoryVersion}</version>
-  </dependency>
+      <groupId>io.takari.aether</groupId>
+      <artifactId>takari-local-repository</artifactId>
+      <version>${takari.LocalRepositoryVersion}</version>
+    </dependency>
     <dependency>
       <groupId>io.takari</groupId>
       <artifactId>takari-filemanager</artifactId>
@@ -135,7 +135,7 @@
           <plugin>
             <groupId>io.takari.maven.plugins</groupId>
             <artifactId>provisio-maven-plugin</artifactId>
-            <version>0.1.16</version>
+            <version>0.1.54</version>
             <executions>
               <execution>
                 <id>maven-distro</id>

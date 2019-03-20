@@ -13,7 +13,7 @@
   </artifactSet>
 
   <fileSet to="/conf/logging">
-    <directory path="${basedir}/src/main/distro" />
+    <directory path="${basedir}/src/main/distro/conf/logging" />
   </fileSet>
 
   <archive name="maven-distro-${mavenVersion}-${project.version}.tar.gz" executable="**/bin/mvn,**/bin/mvnDebug,**/bin/mvnyjp" />
