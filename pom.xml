@@ -18,10 +18,11 @@
 
   <groupId>io.takari.maven</groupId>
   <artifactId>concurrent-build-logger</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>takari-maven-component</packaging>
 
   <properties>
+    <revision>0.2.0-SNAPSHOT</revision>
     <mavenVersion>3.6.0</mavenVersion>
     <slf4jVersion>1.7.25</slf4jVersion>
     <logbackVersion>1.2.3</logbackVersion>
