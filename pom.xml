@@ -26,6 +26,9 @@
     <slf4jVersion>1.7.24</slf4jVersion>
     <logbackVersion>1.2.1</logbackVersion>
     <pluginTestingVersion>2.9.1</pluginTestingVersion>
+    <takari.LocalRepositoryVersion>0.11.2</takari.LocalRepositoryVersion>
+    <takari.fileManagerVersion>0.8.3</takari.fileManagerVersion>
+    <takari.smartBuilderVersion>0.6.1</takari.smartBuilderVersion>
 
     <takari.javaSourceVersion>1.8</takari.javaSourceVersion>
     <takari.transitiveDependencyReference>ignore</takari.transitiveDependencyReference>
@@ -50,7 +53,6 @@
       <scope>provided</scope>
     </dependency>
 
-
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -71,6 +73,21 @@
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
       <version>${slf4jVersion}</version>
+    </dependency>
+    <dependency>
+    <groupId>io.takari.aether</groupId>
+    <artifactId>takari-local-repository</artifactId>
+    <version>${takari.LocalRepositoryVersion}</version>
+  </dependency>
+    <dependency>
+      <groupId>io.takari</groupId>
+      <artifactId>takari-filemanager</artifactId>
+      <version>${takari.fileManagerVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.takari.maven</groupId>
+      <artifactId>takari-smart-builder</artifactId>
+      <version>${takari.smartBuilderVersion}</version>
     </dependency>
 
     <dependency>

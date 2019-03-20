@@ -54,6 +54,14 @@ Uses [jul-to-slf4j](http://www.slf4j.org/legacy.html#jul-to-slf4j) to capture  J
 
 Uses [log4j-over-slf4j](https://www.slf4j.org/legacy.html#log4j-over-slf4j) and [jcl-over-slf4j](https://www.slf4j.org/legacy.html#jclOverSLF4J) to capture and route log4j and commons logging log messages to SLF4j. Replaces plugin dependencies with corresponding bridge libraries as part of plugin classrealm setup. 
 
+## additional maven extensions
+
+We provide additional maven extensions in this build.
+      
+  * [takari-local-repository](https://github.com/takari/takari-local-repository)
+  * [takari-filemanager](https://github.com/takari/takari-filemanager)
+  * [takari-smart-builder](https://github.com/takari/takari-smart-builder)
+
 ## Known issues
 
 * none at this point
