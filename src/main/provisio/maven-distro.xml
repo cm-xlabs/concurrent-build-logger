@@ -16,6 +16,6 @@
     <directory path="${basedir}/src/main/distro" />
   </fileSet>
 
-  <archive name="mfm-${project.version}.zip" executable="**/bin/mvn,**/bin/mvnDebug,**/bin/mvnyjp" />
+  <archive name="maven-distro-${mavenVersion}-${project.version}.tar.gz" executable="**/bin/mvn,**/bin/mvnDebug,**/bin/mvnyjp" />
 
 </assembly>
