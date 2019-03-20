@@ -12,6 +12,10 @@
     <artifactSet to="ext" ref="runtime.classpath" />
   </artifactSet>
 
+  <artifactSet to="lib/ext">
+    <artifact id="${project.groupId}:${project.artifactId}:${project.version}" />
+  </artifactSet>
+
   <fileSet to="/conf/logging">
     <directory path="${basedir}/src/main/distro/conf/logging" />
   </fileSet>
