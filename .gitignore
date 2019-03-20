@@ -1,5 +1,19 @@
+# eclipse:
 .classpath
 .project
 .settings
 /target/
+# IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+# VScode
+.vscode
+# Logs:
+*.log
+*.out
+# git:
+*.orig
+# OS X
 .DS_Store
