@@ -24,7 +24,7 @@
   <properties>
     <mavenVersion>3.6.0</mavenVersion>
     <slf4jVersion>1.7.25</slf4jVersion>
-    <logbackVersion>1.2.1</logbackVersion>
+    <logbackVersion>1.2.3</logbackVersion>
     <pluginTestingVersion>2.9.2</pluginTestingVersion>
     <takari.LocalRepositoryVersion>0.11.2</takari.LocalRepositoryVersion>
     <takari.fileManagerVersion>0.8.3</takari.fileManagerVersion>
