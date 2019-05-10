@@ -23,7 +23,7 @@
 
   <properties>
     <revision>0.2.0-SNAPSHOT</revision>
-    <mavenVersion>3.6.0</mavenVersion>
+    <mavenVersion>3.6.1</mavenVersion>
     <slf4jVersion>1.7.25</slf4jVersion>
     <logbackVersion>1.2.3</logbackVersion>
     <pluginTestingVersion>2.9.2</pluginTestingVersion>
