@@ -23,11 +23,11 @@
 
   <properties>
     <revision>0.2.0-SNAPSHOT</revision>
-    <mavenVersion>3.6.1</mavenVersion>
-    <slf4jVersion>1.7.25</slf4jVersion>
+    <mavenVersion>3.6.3</mavenVersion>
+    <slf4jVersion>1.7.29</slf4jVersion>
     <logbackVersion>1.2.3</logbackVersion>
     <pluginTestingVersion>2.9.2</pluginTestingVersion>
-    <takari.LocalRepositoryVersion>0.11.2</takari.LocalRepositoryVersion>
+    <takari.LocalRepositoryVersion>0.11.3</takari.LocalRepositoryVersion>
     <takari.fileManagerVersion>0.8.3</takari.fileManagerVersion>
     <takari.smartBuilderVersion>0.6.1</takari.smartBuilderVersion>
 
